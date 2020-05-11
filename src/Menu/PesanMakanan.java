@@ -30,6 +30,7 @@ public class PesanMakanan extends MainAbstract {
     
     public PesanMakanan() {
         initComponents();
+        new DaftarMenu();
     }
     
     /**
@@ -123,8 +124,8 @@ public class PesanMakanan extends MainAbstract {
         String mMenu = mNamaMenu.getText();
         int mNoKan = Integer.parseInt(mNoKantin);
         String input = "INSERT INTO pesanan VALUES('" +mNama+ "' , '" +mNoKan+ "' , '"+mMenu+"');";
-        if (mListNama.contains(mNama)) {
-            JOptionPane.showMessageDialog(null,"Maaf nama yang anda gunakan sudah digunakan, silahkan pakai nama lain");
+        if (mListNama.contains(mNama) || (!mListMenu.containsKey(mMenu) && !mListMenu.containsValue(mNoKan))) {
+            JOptionPane.showMessageDialog(null,"Maaf data yang anda masukkan gagal.\nJangan gunakan nama yang sama.\nPastikan nomor kantin dan menu kantin sesuai dengan menu yang tersedia.");
         } else {
             try {
                 Class.forName(mDB);
