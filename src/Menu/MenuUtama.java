@@ -130,7 +130,7 @@ public class MenuUtama extends JFrame {
     private void okPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okPressed
         // TODO add your handling code here:
         String mPilih = mMenuIsi.getText();
-        if (mPilih.equals("1")) {
+        if (mPilih.equals("2")) {
             this.dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -6,12 +6,14 @@
 package Menu;
 
 
-import com.mysql.jdbc.Driver;
-import com.mysql.jdbc.Statement;
+import java.sql.Driver;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -21,20 +23,13 @@ public class PesanMakanan extends javax.swing.JFrame {
     /**
      * Creates new form PesanMakanan
      */
+    final String mDB = "com.mysql.jdbc.Driver";
+    final String mDBURL = "jdbc:mysql://localhost:3306/Pemesan";
+    final String mUser = "root";
+    final String mPass = "";
+    
     public PesanMakanan() {
         initComponents();
-    }
-
-    private static Connection mKoneksi;
- 
-    public static Connection getConnection() throws SQLException {
-        if (mKoneksi == null) {
-            // panggil Driver MySQL
-            new Driver();
-            // buat koneksi
-            mKoneksi = DriverManager.getConnection("jdbc:mysql://localhost:3306/pemesan", "root", "");
-        }
-        return mKoneksi;
     }
     
     /**
@@ -127,12 +122,18 @@ public class PesanMakanan extends javax.swing.JFrame {
         String mNoKantin = mNomorKantin.getText();
         String mMenu = mNamaMenu.getText();
         int mNoKan = Integer.parseInt(mNoKantin);
-        try{
-            Statement statement = (Statement) mKoneksi.createStatement();
-            statement.executeUpdate("INSERT INTO pesanan VALUES ('"+mNama+"','"+mNoKan+"','"+mMenu+"');");
+        String input = "INSERT INTO pesanan VALUES('" +mNama+ "' , '" +mNoKan+ "' , '"+mMenu+"');";
+        try {
+            Class.forName(mDB);
+            Connection mKoneksi = DriverManager.getConnection(mDBURL, mUser, mPass);
+            Statement statement = mKoneksi.createStatement();
+            statement.executeUpdate(input);
             statement.close();
+            mKoneksi.close();
+            mResetField();
             JOptionPane.showMessageDialog(null,"Berhasil Memesan Makanan");
-        }catch(Exception e){
+            this.dispose();
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
         }
     }//GEN-LAST:event_mPesanOkActionPerformed
@@ -182,4 +183,10 @@ public class PesanMakanan extends javax.swing.JFrame {
     private javax.swing.JLabel mPesan;
     private javax.swing.JButton mPesanOk;
     // End of variables declaration//GEN-END:variables
+
+    private void mResetField() {
+        mNamaMenu.setText("");
+        mNamaPemesan.setText("");
+        mNomorKantin.setText("");
+    }
 }
