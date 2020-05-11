@@ -5,7 +5,7 @@
  */
 package Menu;
 
-
+import Menu.MenuUtama;
 import java.sql.Driver;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author IKHBAL
  */
-public class PesanMakanan extends javax.swing.JFrame {
+public class PesanMakanan extends MainAbstract {
     /**
      * Creates new form PesanMakanan
      */
@@ -123,18 +123,22 @@ public class PesanMakanan extends javax.swing.JFrame {
         String mMenu = mNamaMenu.getText();
         int mNoKan = Integer.parseInt(mNoKantin);
         String input = "INSERT INTO pesanan VALUES('" +mNama+ "' , '" +mNoKan+ "' , '"+mMenu+"');";
-        try {
-            Class.forName(mDB);
-            Connection mKoneksi = DriverManager.getConnection(mDBURL, mUser, mPass);
-            Statement statement = mKoneksi.createStatement();
-            statement.executeUpdate(input);
-            statement.close();
-            mKoneksi.close();
-            mResetField();
-            JOptionPane.showMessageDialog(null,"Berhasil Memesan Makanan");
-            this.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
+        if (mListNama.contains(mNama)) {
+            JOptionPane.showMessageDialog(null,"Maaf nama yang anda gunakan sudah digunakan, silahkan pakai nama lain");
+        } else {
+            try {
+                Class.forName(mDB);
+                Connection mKoneksi = DriverManager.getConnection(mDBURL, mUser, mPass);
+                Statement statement = mKoneksi.createStatement();
+                statement.executeUpdate(input);
+                statement.close();
+                mKoneksi.close();
+                mResetField();
+                JOptionPane.showMessageDialog(null,"Berhasil Memesan Makanan");
+                this.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
+            }
         }
     }//GEN-LAST:event_mPesanOkActionPerformed
 
