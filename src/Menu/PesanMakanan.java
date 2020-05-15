@@ -10,6 +10,7 @@ import java.sql.Driver;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -17,20 +18,15 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author IKHBAL
+ * @author AyuAfifah
  */
 public class PesanMakanan extends MainAbstract {
     /**
      * Creates new form PesanMakanan
      */
-    final String mDB = "com.mysql.jdbc.Driver";
-    final String mDBURL = "jdbc:mysql://localhost:3306/Pemesan";
-    final String mUser = "root";
-    final String mPass = "";
     
     public PesanMakanan() {
         initComponents();
-        new DaftarMenu();
     }
     
     /**
@@ -122,24 +118,38 @@ public class PesanMakanan extends MainAbstract {
         String mNama = mNamaPemesan.getText();
         String mNoKantin = mNomorKantin.getText();
         String mMenu = mNamaMenu.getText();
-        int mNoKan = Integer.parseInt(mNoKantin);
-        String input = "INSERT INTO pesanan VALUES('" +mNama+ "' , '" +mNoKan+ "' , '"+mMenu+"');";
-        if (mListNama.contains(mNama) || (!mListMenu.containsKey(mMenu) && !mListMenu.containsValue(mNoKan))) {
-            JOptionPane.showMessageDialog(null,"Maaf data yang anda masukkan gagal.\nJangan gunakan nama yang sama.\nPastikan nomor kantin dan menu kantin sesuai dengan menu yang tersedia.");
-        } else {
-            try {
-                Class.forName(mDB);
-                Connection mKoneksi = DriverManager.getConnection(mDBURL, mUser, mPass);
-                Statement statement = mKoneksi.createStatement();
+        Pesan mPesan = new Pesan(mNama,mMenu);
+        mPesan.tambahPesanan();
+        String input = "INSERT INTO pesanan VALUES('" +mNama+ "' , '" +mNoKantin+ "' , '"+mMenu+"');";
+        boolean ketemu = false;
+        try {
+            Class.forName(mDB);
+            Connection mKoneksi = DriverManager.getConnection(mDBURL, mUser, mPass);
+            Statement statement = mKoneksi.createStatement();
+            ResultSet mResult = statement.executeQuery("SELECT namaMenu,noKantin FROM `Daftar_Menu`");
+            mResult.next();
+            String mMenuDB;
+            String mNoKantinDB;
+            do{
+                mMenuDB = mResult.getString("namaMenu");
+                mNoKantinDB = mResult.getString("noKantin");
+                if(mMenuDB.equals(mMenu) && mNoKantinDB.equals(mNoKantin))
+                    ketemu = true;
+            }while(mResult.next());
+            if (ketemu) {
                 statement.executeUpdate(input);
+                JOptionPane.showMessageDialog(null,"Berhasil Memesan Makanan");
                 statement.close();
                 mKoneksi.close();
                 mResetField();
-                JOptionPane.showMessageDialog(null,"Berhasil Memesan Makanan");
                 this.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
+            } else {
+                JOptionPane.showMessageDialog(null,"Pastikan nama menu dan nomor kantin sesuai!.");
+                mResetField();
+                new PesanMakanan();
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
         }
     }//GEN-LAST:event_mPesanOkActionPerformed
 
