@@ -5,14 +5,25 @@
  */
 package Menu;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JFrame;
+import java.sql.Driver;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
- * @author IKHBAL
+ * @author EriYuni
  */
-public abstract class MainAbstract extends JFrame {
-    public ArrayList mListNama = new ArrayList();
-    public HashMap<String, Integer> mListMenu = new HashMap<String, Integer>();
+public class MainAbstract extends JFrame {
+    final static String mDB = "com.mysql.jdbc.Driver";
+    final static String mDBURL = "jdbc:mysql://localhost:3306/Pemesan";
+    final static String mUser = "root";
+    final static String mPass = "";
+    public HashMap<String, String> mListMenu = new HashMap<String, String>();
 }
