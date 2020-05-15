@@ -11,11 +11,13 @@ import com.mysql.jdbc.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 /**
  *
- * @author IKHBAL
+ * @author EriYuni
  */
 public class MenuUtama extends MainAbstract {
     
@@ -132,13 +134,20 @@ public class MenuUtama extends MainAbstract {
     private void okPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okPressed
         // TODO add your handling code here:
         String mPilih = mMenuIsi.getText();
-        if (mPilih.equals("2")) {
+        if (mPilih.equals("1")) {
             this.dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PesanMakanan().setVisible(true);
-            }
-        });
+                public void run() {
+                    new DaftarListMenu().setVisible(true);
+                }
+            });
+        } else if (mPilih.equals("2")) {
+            this.dispose();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new PesanMakanan().setVisible(true);
+                }
+            });
         } else if (mPilih.equals("6")) {
             System.exit(0);
         }
@@ -172,12 +181,7 @@ public class MenuUtama extends MainAbstract {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MenuUtama().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
