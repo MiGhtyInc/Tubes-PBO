@@ -5,11 +5,13 @@
  */
 package Menu;
 
+import static Menu.MainAbstract.mDB;
 import Menu.PesanMakanan;
 import javax.swing.JFrame;
 import com.mysql.jdbc.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 /**
  *
- * @author EriYuni
+ * @author IKHBAL
  */
 public class MenuUtama extends MainAbstract {
     
@@ -43,33 +45,29 @@ public class MenuUtama extends MainAbstract {
         mMenuDua = new javax.swing.JLabel();
         mMenuTiga = new javax.swing.JLabel();
         mMenuEmpat = new javax.swing.JLabel();
-        mMenuLima = new javax.swing.JLabel();
-        mMenuEnam = new javax.swing.JLabel();
         mPilihMenu = new javax.swing.JLabel();
         mMenuIsi = new javax.swing.JTextField();
         mMenuOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mMenu.setText("Menu Kantin");
+        mMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/list.png"))); // NOI18N
 
         mMenuSatu.setText("1. Daftar Menu");
 
         mMenuDua.setText("2. Pesan Makanan");
 
-        mMenuTiga.setText("3. Ganti Pesanan");
+        mMenuTiga.setText("3. Tampilkan Pesanan");
 
-        mMenuEmpat.setText("4. Hapus Pesanan");
-
-        mMenuLima.setText("5. Tampilkan Pesanan");
-
-        mMenuEnam.setText("6. Keluar");
+        mMenuEmpat.setText("4. Keluar");
 
         mPilihMenu.setText("Pilih Menu");
 
         mMenuIsi.setToolTipText("");
 
-        mMenuOk.setText("OK");
+        mMenuOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/ok.png"))); // NOI18N
+        mMenuOk.setBorderPainted(false);
+        mMenuOk.setContentAreaFilled(false);
         mMenuOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okPressed(evt);
@@ -83,30 +81,28 @@ public class MenuUtama extends MainAbstract {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(mMenu))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(mMenuDua)
                             .addComponent(mMenuSatu)
                             .addComponent(mMenuTiga)
                             .addComponent(mMenuEmpat)
-                            .addComponent(mMenuLima)
-                            .addComponent(mMenuEnam)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(mPilihMenu)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mMenuIsi, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mMenuOk, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                                    .addComponent(mMenuOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mMenuIsi, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(mMenu)))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mMenu)
+                .addComponent(mMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(mMenuSatu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -115,17 +111,13 @@ public class MenuUtama extends MainAbstract {
                 .addComponent(mMenuTiga)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mMenuEmpat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mMenuLima)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mMenuEnam)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mPilihMenu)
                     .addComponent(mMenuIsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(mMenuOk)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mMenuOk, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,8 +140,17 @@ public class MenuUtama extends MainAbstract {
                     new PesanMakanan().setVisible(true);
                 }
             });
-        } else if (mPilih.equals("6")) {
+        } else if (mPilih.equals("3")) {
+            this.dispose();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new TampilkanPesanan().setVisible(true);
+                }
+            });
+        } else if (mPilih.equals("4")) {
             System.exit(0);
+        } else {
+            JOptionPane.showMessageDialog(null,"Pilih menu yang benar!");
         }
     }//GEN-LAST:event_okPressed
 
@@ -188,12 +189,16 @@ public class MenuUtama extends MainAbstract {
     private javax.swing.JLabel mMenu;
     private javax.swing.JLabel mMenuDua;
     private javax.swing.JLabel mMenuEmpat;
-    private javax.swing.JLabel mMenuEnam;
     private javax.swing.JTextField mMenuIsi;
-    private javax.swing.JLabel mMenuLima;
     private javax.swing.JButton mMenuOk;
     private javax.swing.JLabel mMenuSatu;
     private javax.swing.JLabel mMenuTiga;
     private javax.swing.JLabel mPilihMenu;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mResetField() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

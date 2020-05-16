@@ -25,31 +25,29 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-                      <Component id="mMenu" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="mMenuDua" min="-2" max="-2" attributes="0"/>
                           <Component id="mMenuSatu" min="-2" max="-2" attributes="0"/>
                           <Component id="mMenuTiga" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="mMenuEmpat" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="mMenuLima" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="mMenuEnam" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="mPilihMenu" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="mMenuOk" min="-2" pref="44" max="-2" attributes="0"/>
                                   <Component id="mMenuIsi" min="-2" pref="99" max="-2" attributes="0"/>
-                                  <Component id="mMenuOk" min="-2" pref="65" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="mMenu" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="180" max="32767" attributes="0"/>
+              <EmptySpace pref="174" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +55,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="mMenu" min="-2" max="-2" attributes="0"/>
+              <Component id="mMenu" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="mMenuSatu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -66,18 +64,14 @@
               <Component id="mMenuTiga" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="mMenuEmpat" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="mMenuLima" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="mMenuEnam" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="mPilihMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mMenuIsi" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="mMenuOk" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mMenuOk" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace pref="94" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +79,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="mMenu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Menu Kantin"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Menu/image/list.png"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="mMenuSatu">
@@ -100,22 +96,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="mMenuTiga">
       <Properties>
-        <Property name="text" type="java.lang.String" value="3. Ganti Pesanan"/>
+        <Property name="text" type="java.lang.String" value="3. Tampilkan Pesanan"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="mMenuEmpat">
       <Properties>
-        <Property name="text" type="java.lang.String" value="4. Hapus Pesanan"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="mMenuLima">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="5. Tampilkan Pesanan"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="mMenuEnam">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="6. Keluar"/>
+        <Property name="text" type="java.lang.String" value="4. Keluar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="mPilihMenu">
@@ -130,7 +116,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="mMenuOk">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Menu/image/ok.png"/>
+        </Property>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okPressed"/>

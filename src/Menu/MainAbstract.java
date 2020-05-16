@@ -18,12 +18,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author EriYuni
+ * @author IKHBAL
  */
-public class MainAbstract extends JFrame {
+public abstract class MainAbstract extends JFrame {
     final static String mDB = "com.mysql.jdbc.Driver";
     final static String mDBURL = "jdbc:mysql://localhost:3306/Pemesan";
     final static String mUser = "root";
     final static String mPass = "";
+    static int mCount = 0;
     public HashMap<String, String> mListMenu = new HashMap<String, String>();
+    public abstract void mResetField();
 }

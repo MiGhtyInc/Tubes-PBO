@@ -15,10 +15,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 /**
  *
- * @author AyuAfifah
+ * @author IKHBAL
  */
 public class PesanMakanan extends MainAbstract {
     /**
@@ -39,29 +40,42 @@ public class PesanMakanan extends MainAbstract {
     private void initComponents() {
 
         mPesan = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        mNama = new javax.swing.JLabel();
+        mNoKantin = new javax.swing.JLabel();
+        mMenu = new javax.swing.JLabel();
         mNamaPemesan = new javax.swing.JTextField();
         mNomorKantin = new javax.swing.JTextField();
         mNamaMenu = new javax.swing.JTextField();
         mPesanOk = new javax.swing.JButton();
+        mBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(100, 100, 240));
 
         mPesan.setText("Pesan Makanan");
 
-        jLabel1.setText("Nama pemesan");
+        mNama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/garis_nama.png"))); // NOI18N
 
-        jLabel2.setText("Nomor Kantin");
+        mNoKantin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/garis_no.png"))); // NOI18N
 
-        jLabel3.setText("Menu pesanan");
+        mMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/garis_menu.png"))); // NOI18N
 
-        mPesanOk.setText("Pesan");
+        mPesanOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/pesan.png"))); // NOI18N
+        mPesanOk.setBorder(null);
+        mPesanOk.setBorderPainted(false);
+        mPesanOk.setContentAreaFilled(false);
         mPesanOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mPesanOkActionPerformed(evt);
+            }
+        });
+
+        mBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/image/back.png"))); // NOI18N
+        mBack.setBorderPainted(false);
+        mBack.setContentAreaFilled(false);
+        mBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mBackActionPerformed(evt);
             }
         });
 
@@ -75,18 +89,22 @@ public class PesanMakanan extends MainAbstract {
                         .addGap(154, 154, 154)
                         .addComponent(mPesan))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(mBack, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(mNama)
+                            .addComponent(mMenu)
+                            .addComponent(mNoKantin))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mNamaPemesan, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mNomorKantin, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mPesanOk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(126, Short.MAX_VALUE))
+                            .addComponent(mPesanOk)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(mNamaPemesan, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                .addComponent(mNomorKantin, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mNamaMenu)))))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,19 +113,21 @@ public class PesanMakanan extends MainAbstract {
                 .addComponent(mPesan)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(mNama)
                     .addComponent(mNamaPemesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(mNomorKantin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mMenu))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(mNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(mPesanOk)
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addComponent(mNoKantin)
+                    .addComponent(mNomorKantin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(mPesanOk, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(mBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -143,15 +163,30 @@ public class PesanMakanan extends MainAbstract {
                 mKoneksi.close();
                 mResetField();
                 this.dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new MenuUtama().setVisible(true);
+                    }
+                });
             } else {
                 JOptionPane.showMessageDialog(null,"Pastikan nama menu dan nomor kantin sesuai!.");
                 mResetField();
-                new PesanMakanan();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Gagal Memesan Makanan");
         }
     }//GEN-LAST:event_mPesanOkActionPerformed
+
+    private void mBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBackActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MenuUtama().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_mBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,17 +224,19 @@ public class PesanMakanan extends MainAbstract {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton mBack;
+    private javax.swing.JLabel mMenu;
+    private javax.swing.JLabel mNama;
     private javax.swing.JTextField mNamaMenu;
     private javax.swing.JTextField mNamaPemesan;
+    private javax.swing.JLabel mNoKantin;
     private javax.swing.JTextField mNomorKantin;
     private javax.swing.JLabel mPesan;
     private javax.swing.JButton mPesanOk;
     // End of variables declaration//GEN-END:variables
 
-    private void mResetField() {
+    @Override
+    public void mResetField() {
         mNamaMenu.setText("");
         mNamaPemesan.setText("");
         mNomorKantin.setText("");
