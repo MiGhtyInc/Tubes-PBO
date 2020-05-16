@@ -7,7 +7,7 @@ package Menu;
 
 /**
  *
- * @author IKHBAL
+ * @author AyuAfifah
  */
 public class Home extends MainAbstract {
 
